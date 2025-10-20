@@ -2,38 +2,73 @@ let num1;
 let operator;
 let num2;
 
-function add(num1, num2) {
-    return num1 + num2;
+let displayValue = "0";
+
+function add(a, b) {
+    return a + b;
 }
 
-function subtract(num1, num2) {
-    return num1 - num2;
+function subtract(a, b) {
+    return a - b;
 }
 
-function multiply(num1, num2) {
-    return num1 * num2;
+function multiply(a, b) {
+    return a * b;
 }
 
-function divide(num1, num2) {
-    if (num2 == 0) {
+function divide(a, b) {
+    if (b == 0) {
         return "undefined";
     }
     else {
-        return num1 / num2;
+        return a / b;
     }
 }
 
-function operate(num1, num2, operator) {
+function operate(a, b, operator) {
     if (operator === "+") {
-        return add(num1, num2);
+        return add(a, b);
     }
     else if (operator === "-") {
-        return subtract(num1, num2);
+        return subtract(a, b);
     }
     else if (operator === "*") {
-        return multiply(num1, num2) 
+        return multiply(a, b) 
     }
     else if (operator === "/") {
-        return divide(num1, num2);
+        return divide(a, b);
     }
 }
+
+
+// display
+const screen = document.querySelector(".screen-content");
+
+function updateScreen() {
+    screen.textContent = displayValue;
+}
+
+// start with 0 on screen
+updateScreen();
+
+function inputDigit(digit) {
+    if (displayValue === "0") {
+        displayValue = digit;
+    }
+    else {
+        displayValue += digit;
+    }
+
+    updateScreen();
+}
+
+function clearDisplay() {
+    displayValue = "0";
+    updateScreen();
+}
+
+document.querySelectorAll(".number").forEach(btn => {
+    btn.addEventListener("click", () => {
+        inputDigit(btn.textContent.trim());
+    });
+})
