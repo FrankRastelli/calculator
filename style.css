@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightblue;
+    gap: 20px;
+}
+
+.screen {
+    background-color: rgb(234, 116, 234);
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.left-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.center-left-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.center-right-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.right-buttons {
+    display: flex;
+    flex-direction: column;
+}
