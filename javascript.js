@@ -158,10 +158,25 @@ function equalsPressed() {
     }
 }
 
+function clearAll() {
+    firstValue = null;
+    selectedOperator = null;
+    secondValue = null;
+    result = null;
+
+    firstRecieved = false;
+    displayValue = "0";
+}
+
 const equals = document.querySelector(".equals");
 
 const clear = document.querySelector(".clear");
 
 equals.addEventListener("click", () => {
     equalsPressed();
+});
+
+clear.addEventListener("click", () => {
+    clearAll();
+    updateScreen();
 });
