@@ -1,8 +1,9 @@
 let firstValue = null;
 let selectedOperator = null;
-let evaluated = null;
 let secondValue = null;
+let result = null;
 
+let firstRecieved = false;
 let displayValue = "0";
 
 function add(a, b) {
@@ -53,6 +54,10 @@ function updateScreen() {
 updateScreen();
 
 function inputDigit(digit) {
+    if (firstRecieved === true) {
+        displayValue = "0";
+    }
+
     if (displayValue === "0") {
         displayValue = digit;
     }
@@ -102,36 +107,61 @@ division.addEventListener("click", () => {
     evaluate("/");
 });
 
-
 function evaluate(operator) {
-    // if this is the first operator selected
     if (selectedOperator === null) {
         selectedOperator = operator;
-        
-        // get first value
-        firstValue = parseInt(displayValue);
 
-        // get display ready for second number
-        displayValue = "0"; 
+        firstValue = parseFloat(displayValue);
+
+        firstRecieved = true;
+    }
+    else if (selectedOperator != null && displayValue === firstValue) {
+        selectedOperator = operator;
     }
     else {
-        // get second value
-        secondValue = parseInt(displayValue);
+        secondValue = parseFloat(displayValue);
 
-        // perform operation
-        evaluated = operate(firstValue, secondValue, selectedOperator);
+        secondRecieved = true;
 
-        firstValue = evaluated;
+        result = operate(firstValue, secondValue, selectedOperator);
+
+        firstValue = result;
 
         secondValue = null;
 
-        displayValue = firstValue;
+        displayValue = result;
 
         updateScreen();
 
-        displayValue = "0";
-
         selectedOperator = operator;
     }
-    
+
 }
+
+function equalsPressed() {
+    if (firstRecieved === true && selectedOperator != null) {
+        secondValue = parseFloat(displayValue);
+
+        secondRecieved = true;
+
+        result = operate(firstValue, secondValue, selectedOperator);
+
+        firstValue = result;
+
+        secondValue = null;
+
+        displayValue = result;
+
+        updateScreen();
+
+        selectedOperator = null;
+    }
+}
+
+const equals = document.querySelector(".equals");
+
+const clear = document.querySelector(".clear");
+
+equals.addEventListener("click", () => {
+    equalsPressed();
+});
