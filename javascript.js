@@ -3,7 +3,8 @@ let selectedOperator = null;
 let secondValue = null;
 let result = null;
 
-let firstRecieved = false;
+let firstReceived = false;
+let waitingForSecond = true;
 let displayValue = "0";
 
 function add(a, b) {
@@ -20,7 +21,7 @@ function multiply(a, b) {
 
 function divide(a, b) {
     if (b == 0) {
-        return "undefined";
+        return "no🙂‍↔️no🚫no👎";
     }
     else {
         return a / b;
@@ -54,8 +55,9 @@ function updateScreen() {
 updateScreen();
 
 function inputDigit(digit) {
-    if (firstRecieved === true) {
+    if (firstReceived === true && waitingForSecond === true) {
         displayValue = "0";
+        waitingForSecond = false;
     }
 
     if (displayValue === "0") {
@@ -68,24 +70,13 @@ function inputDigit(digit) {
     updateScreen();
 }
 
-function clearDisplay() {
-    displayValue = "0";
-    updateScreen();
-}
-
 document.querySelectorAll(".number").forEach(btn => {
     btn.addEventListener("click", () => {
         inputDigit(btn.textContent.trim());
     });
 });
 
-// calculator logic
-// so user enters first number and then selects an operator. Once an operator is selected
-// we store the first number in a variable, and must indicate that it is time to get the
-// next number. So i need a variable that will say an operator has been selected, so lets
-// get ready for the second number. Once the second number is entered, the user can either,
-// select another operator to chain, or press equals (for now).
-
+// -- calculator logic --
 const addition = document.querySelector(".add");
 const subtraction = document.querySelector(".subtraction");
 const multiplication = document.querySelector(".multiplication");
@@ -113,7 +104,7 @@ function evaluate(operator) {
 
         firstValue = parseFloat(displayValue);
 
-        firstRecieved = true;
+        firstReceived = true;
     }
     else if (selectedOperator != null && displayValue === firstValue) {
         selectedOperator = operator;
@@ -121,7 +112,7 @@ function evaluate(operator) {
     else {
         secondValue = parseFloat(displayValue);
 
-        secondRecieved = true;
+        waitingForSecond = true;
 
         result = operate(firstValue, secondValue, selectedOperator);
 
@@ -139,10 +130,10 @@ function evaluate(operator) {
 }
 
 function equalsPressed() {
-    if (firstRecieved === true && selectedOperator != null) {
+    if (firstReceived === true && selectedOperator != null) {
         secondValue = parseFloat(displayValue);
 
-        secondRecieved = true;
+        waitingForSecond = true;
 
         result = operate(firstValue, secondValue, selectedOperator);
 
@@ -164,7 +155,8 @@ function clearAll() {
     secondValue = null;
     result = null;
 
-    firstRecieved = false;
+    firstReceived = false;
+    waitingForSecond = true;
     displayValue = "0";
 }
 
@@ -178,5 +170,13 @@ equals.addEventListener("click", () => {
 
 clear.addEventListener("click", () => {
     clearAll();
+    updateScreen();
+});
+
+// -- extra --
+const deletion = document.querySelector(".delete");
+
+deletion.addEventListener("click", () => {
+    displayValue = displayValue.slice(0, -1);
     updateScreen();
 });
