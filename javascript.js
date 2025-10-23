@@ -180,3 +180,9 @@ deletion.addEventListener("click", () => {
     displayValue = displayValue.slice(0, -1);
     updateScreen();
 });
+
+const decimal = document.querySelector(".decimal");
+
+decimal.addEventListener("click", () => {
+    inputDigit(decimal.textContent.trim());
+});
