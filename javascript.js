@@ -60,6 +60,10 @@ function inputDigit(digit) {
         waitingForSecond = false;
     }
 
+    if (selectedOperator === "=") {
+        clearAll();
+    }
+
     if (displayValue === "0") {
         displayValue = digit;
     }
@@ -145,7 +149,7 @@ function equalsPressed() {
 
         updateScreen();
 
-        selectedOperator = null;
+        selectedOperator = "=";
     }
 }
 
@@ -177,8 +181,12 @@ clear.addEventListener("click", () => {
 const deletion = document.querySelector(".delete");
 
 deletion.addEventListener("click", () => {
-    displayValue = displayValue.slice(0, -1);
-    updateScreen();
+        displayValue = displayValue.slice(0, -1);
+        if (displayValue === "")
+        {
+            displayValue = "0";
+        }
+        updateScreen();
 });
 
 const decimal = document.querySelector(".decimal");
