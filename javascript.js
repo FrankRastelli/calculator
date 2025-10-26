@@ -8,6 +8,7 @@ let waitingForSecond = true;
 let displayValue = "0";
 
 let percentToggle = false;
+let signToggle = false;
 
 function add(a, b) {
     return a + b;
@@ -181,6 +182,7 @@ function clearAll() {
     displayValue = "0";
 
     percentToggle = false;
+    signToggle = false;
 }
 
 const equals = document.querySelector(".equals");
@@ -204,6 +206,9 @@ deletion.addEventListener("click", () => {
         if (displayValue === "")
         {
             displayValue = "0";
+        }
+        if (displayValue.includes("%") === false) {
+            percentToggle = false;
         }
         updateScreen();
 });
@@ -232,3 +237,19 @@ percent.addEventListener("click", () => {
 function calculatePercentage(number) { 
     return number = number/100;
 }
+
+const signChange = document.querySelector(".plus-minus");
+
+signChange.addEventListener("click", () => {
+    if (signToggle === false) {
+        displayValue = "-" + displayValue;
+        updateScreen();
+        signToggle = true;
+    }
+    else {
+        let removeNegative = displayValue.replace("-", "");
+        displayValue = removeNegative;
+        updateScreen();
+        signToggle = false;
+    }
+});
