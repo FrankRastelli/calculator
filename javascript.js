@@ -7,6 +7,8 @@ let firstReceived = false;
 let waitingForSecond = true;
 let displayValue = "0";
 
+let percentToggle = false;
+
 function add(a, b) {
     return a + b;
 }
@@ -108,6 +110,11 @@ function evaluate(operator) {
 
         firstValue = parseFloat(displayValue);
 
+        if (percentToggle === true) {
+            firstValue = calculatePercentage(firstValue);
+            percentToggle = false;
+        }
+
         firstReceived = true;
     }
     else if (selectedOperator != null && displayValue === firstValue) {
@@ -115,6 +122,11 @@ function evaluate(operator) {
     }
     else {
         secondValue = parseFloat(displayValue);
+
+        if (percentToggle === true) {
+            secondValue = calculatePercentage(secondValue);
+            percentToggle = false;
+        }
 
         waitingForSecond = true;
 
@@ -136,6 +148,11 @@ function evaluate(operator) {
 function equalsPressed() {
     if (firstReceived === true && selectedOperator != null) {
         secondValue = parseFloat(displayValue);
+
+        if (percentToggle === true) {
+            secondValue = calculatePercentage(secondValue);
+            percentToggle = false;
+        }
 
         waitingForSecond = true;
 
@@ -162,6 +179,8 @@ function clearAll() {
     firstReceived = false;
     waitingForSecond = true;
     displayValue = "0";
+
+    percentToggle = false;
 }
 
 const equals = document.querySelector(".equals");
@@ -194,3 +213,22 @@ const decimal = document.querySelector(".decimal");
 decimal.addEventListener("click", () => {
     inputDigit(decimal.textContent.trim());
 });
+
+const percent = document.querySelector(".percent");
+
+percent.addEventListener("click", () => {
+    if (percentToggle === false) {
+        inputDigit(percent.textContent.trim());
+        percentToggle = true;
+    }
+    else {
+        let withoutPercent = displayValue.replace("%", "");
+        displayValue = withoutPercent;
+        updateScreen();
+        percentToggle = false;
+    }
+});
+
+function calculatePercentage(number) { 
+    return number = number/100;
+}
