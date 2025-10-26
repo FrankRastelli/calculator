@@ -1,38 +1,73 @@
+body {
+    background-color: rgb(169,186,157);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
 .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: lightblue;
-    gap: 20px;
+    background-color: rgb(110,124,90);
+    gap: 50px;
+    width: 450px;
+    height: 700px;
+    max-height: 100vh;
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .screen {
-    background-color: rgb(234, 116, 234);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(207,232,179);
+    width: 400px;
+    height: 100px;
+    border-radius: 25px;
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .button-container {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 20px;
+}
+
+button {
+    background-color: rgb(169,186,157);
+    height: 75px;
+    width: 75px;
+    border-radius: 50px;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 0px;
 }
 
 .left-buttons {
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 
 .center-left-buttons {
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 
 .center-right-buttons {
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 
 .right-buttons {
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
