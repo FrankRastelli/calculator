@@ -216,7 +216,9 @@ deletion.addEventListener("click", () => {
 const decimal = document.querySelector(".decimal");
 
 decimal.addEventListener("click", () => {
-    inputDigit(decimal.textContent.trim());
+    if (displayValue.includes(".") === false) {
+        inputDigit(decimal.textContent.trim());
+    }
 });
 
 const percent = document.querySelector(".percent");
@@ -253,3 +255,66 @@ signChange.addEventListener("click", () => {
         signToggle = false;
     }
 });
+
+// -- keyboard support --
+(function setupKeyboard() {
+    window.addEventListener("keydown", (event) => {
+        const key = event.key;
+
+        // digits
+        if (key >= "0" && key <= "9") {
+            inputDigit(key);
+            event.preventDefault();
+            return;
+        }
+
+        if (key === "+" || key === "-" || key === "*" || key === "/") {
+            evaluate(key);
+            event.preventDefault();
+            return;
+        }
+
+        // decimal point
+        if (key === ".") {
+            decimal.click();
+            event.preventDefault();
+            return;
+        }
+
+        // equals
+        if (key === "Enter" || key === "=") {
+            equalsPressed();
+            event.preventDefault();
+            return;
+        }
+
+        // backspace
+        if (key === "Backspace") {
+            deletion.click();
+            event.preventDefault();
+            return;
+        }
+
+        // escape
+        if (key === "Escape") {
+            clearAll();
+            updateScreen();
+            event.preventDefault();
+            return;
+        }
+
+        // percent
+        if (key === "%") {
+            percent.click();
+            event.preventDefault();
+            return;
+        }
+
+        // sign toggle
+        if (key === "t") {
+            signChange.click();
+            event.preventDefault();
+            return;
+        }
+    });
+})();
