@@ -67,6 +67,10 @@ function inputDigit(digit) {
         clearAll();
     }
 
+    if (displayValue.length === 10) {
+        return;
+    }
+
     if (displayValue === "0") {
         displayValue = digit;
     }
