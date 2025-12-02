@@ -1,4 +1,4 @@
-# 🧮 Calculato
+# 🧮 Calculator
 
 A simple, web-based, fully functional calculator built for [The Odin Project](https://www.theodinproject.com/).
 It supports all basic arithmetic operations, keyboard input, percentages, sign toggling, and live display updates.
